@@ -62,8 +62,9 @@ $transformer->loadRules($inputRules);
 
 
 //TODO: Print out HTML Errors
+//TODO: Print out all loaded rules.
 //TODO: Add checkbox to include default WP-plugin rules.
-//TODO:
+//TODO: Checkbox to Hide Empty Text Nodes
 
 // Ignores errors on HTML parsing
 libxml_use_internal_errors(true);
@@ -78,6 +79,9 @@ $transformerLog = ob_get_clean();
 
 // Get errors from transformer
 $warnings = $transformer->getWarnings();
+//TODO: Print these somewhere?
+
+//TODO: Print out the context at the end, right before converting it to HTML.
 
 // Renders the InstantArticle markup format
 $result = $instant_article->render();

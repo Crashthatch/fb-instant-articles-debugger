@@ -19,6 +19,12 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        <div class="header">
+            <h1>Facebook Instant Articles Transformer Debugger</h1>
+            Put your HTML into box 1, and your transform rules JSON into box 2, and press "Transform" to see what the <a href="https://github.com/facebook/facebook-instant-articles-sdk-php">Facebook Instant Articles SDK</a> will transform it to.<BR>
+            You can see the log debug output of the transformer as it walks your HTML tree and applies rules.
+        </div>
+
         <div class="html-input">
             <textarea>
 <html>
@@ -49,8 +55,7 @@
 </div>
 <p>Curabitur vulputate odio eu justo <i>venenatis</i>, a pretium orci placerat. Nam sed neque quis eros vestibulum mattis. Donec vitae mi egestas, laoreet massa et, fringilla libero.</p>
 </body>
-</html>
-            </textarea>
+</html></textarea>
         </div>
         <div class="rules-input">
             <textarea>
@@ -155,6 +160,114 @@
         </div>
         <div class="log-output">
             <textarea></textarea>
+        </div>
+
+        <div class="faqs">
+            <h3>What Is This Tool?</h3>
+            <p>
+                This tool helps you to debug <a href="https://developers.facebook.com/docs/instant-articles/sdk/transformer">Facebook Instant Articles Transformers</a>.
+            </p>
+
+            <h3>What are Facebook Instant Articles?</h3>
+            <p>
+                On mobile, someone clicking the link to one of your articles that has been shared on Facebook
+                will normally open their browser and load your website. This can be slow.
+            </p>
+            <p>
+                <a href="https://instantarticles.fb.com/">Instant Articles</a> open instantly inside the Facebook app on mobile-
+                they can be displayed very quickly (they are partially pre-loaded), and with a consistent user interface.
+                The articles are stored by Facebook to allow this speed, which takes pressure off your web server
+                and this means the articles will continue to load even if your site goes down.
+            </p>
+            <p>
+                Google's and Apple's similar technologies are <a href="https://www.ampproject.org/">Accelerated Mobile Pages (AMP)</a> and <a href="https://developer.apple.com/news-publisher/">Apple News</a>.
+            </p>
+
+            <h3>Why do I need a Transformer?</h3>
+            <p>
+                Instant Articles support only a subset of HTML. So your regular articles, full of complex website display HTML, CSS and Javascript need to be transformed into the <a href="https://developers.facebook.com/docs/instant-articles/reference">elements Facebook understands</a>.
+                <a href="https://developers.facebook.com/docs/instant-articles/sdk/transformer">Transformers</a> are the way was the Facebook SDK provides to map from your existing articles' HTML to this subset language using <a href="https://developers.facebook.com/docs/instant-articles/sdk/transformer-rules">Transfomer Rules</a>.
+            </p>
+            <p>
+                eg. Instant Articles expect &lt;figure&gt; tags instead of &lt;img&gt; tags. To transform these tags you would use an <a href="https://developers.facebook.com/docs/instant-articles/sdk/transformer-rules#rule-classes-graphic">ImageRule</a> with a selector "img" and property "image.url": {"type" : "string", "selector" : "img", "attribute": "src"}, as seen in the demo rules in box2 above.
+            </p>
+
+
+            <h3>Can't I just use a plugin?</h3>
+            <p>
+                If you are using Wordpress, there is a plugin to automatically convert your articles using a "best guess"
+                set of <a href="https://github.com/Automattic/facebook-instant-articles-wp/blob/f2edb173c65fd8a74147f2254d7e0fc480db8d1c/rules-configuration.json">default rules</a>.
+                This should provide a "good enough" transformation for the majority of websites.
+            </p>
+            <p>
+                If you have custom elements in your page, you will need to create <a href="https://en-gb.wordpress.org/plugins/fb-instant-articles/faq/">Custom Transformer Rules</a>, which this tool helps you create & test.
+            </p>
+
+            <h3>How does Transformation work?</h3>
+            <p>
+                Your HTML is walked over, starting from the root element. Each element is compared to the list of rules
+                (in reverse order- so later rules will override earlier ones). In the debug output (box 4) above, you will see
+                each element being processed in turn, starting with at the &lt;html&gt; element, and proceeding down the tree.
+            </p>
+            <p>
+                If an element matches a rule, the rule will be applied, which usually results in a new element
+                being created in the output (eg. a BoldRule will create a &lt;strong&gt; element, or an
+                InteractiveRule will create an &lt;iframe&gt;).
+            </p>
+            <p>
+                If an element does not match any rule, it will be ignored, and removed from the output. If you want to continue to process its child elements, you should create a PassThroughRule.
+            </p>
+            <p>
+                At the end you are left with a HTML article that uses only the allowed subset of elements that can be submitted to Facebook Instant Articles for display (box 3).
+            </p>
+
+            <h3>Why did you create this tool?</h3>
+            <p>
+                I wanted to publish Instant Articles from a Wordpress website, but I had several custom elements in
+                my HTML templates which were not appearing in the instant articles, when transformed by the
+                <a href="https://en-gb.wordpress.org/plugins/fb-instant-articles/">Wordpress Instant Articles Plugin</a>.
+                The solution is to use <a href="https://en-gb.wordpress.org/plugins/fb-instant-articles/faq/">Custom Transformer Rules</a>
+                through the plugin, but because the plugin is not designed for advanced transforming (but rather to work out of the box for simple websites)
+                it is very slow to change the rules in plugin setup, edit & republish the article, then check on a phone to see if the change had any effect.
+                The plugin also provides very little debug logging or error messages, and often fails silenlty.
+            </p>
+            <p>
+                This tool is my attempt at creating a better workflow for developing custom transformer rules.
+                If you are using Wordpress, you can create your rules using this tool then copy and paste them into the
+                "Advanced Custom Transformer Rules" section of the plugin's setup.
+            </p>
+            <p>
+                The rules produced are not Wordpress specific. You can test / develop them here, then
+                <a href="https://github.com/Crashthatch/fb-instant-articles-debugger/blob/6404819b6cf113a1dfb3d5bc8bf71dfbf34ee3e3/transform.php#L61">use them as input</a> to the FB PHP SDK Transformer.
+            </p>
+
+            <h3>How do I debug further?</h3>
+            <p>
+                If you need more information than this tool provides, you can use the Facebook SDK locally to run your rules on your HTML using something like the script at the end of FB's <a href="https://developers.facebook.com/docs/instant-articles/sdk/transformer">transformer documentation</a> (which <a href="https://github.com/Crashthatch/fb-instant-articles-debugger/blob/master/transform.php">this tool</a> is based on).
+                <a href="https://github.com/Crashthatch/fb-instant-articles-debugger">Cloning this tool</a> and modifying transform.php to work as a CLI script might be a good starting point.
+            </p>
+            <p>
+                You can then step through it with your IDE's PHP debugger, add breakpoints, or add extra print statements into the <a href="https://github.com/facebook/facebook-instant-articles-sdk-php/blob/master/src/Facebook/InstantArticles/Transformer/Transformer.php">Transformer</a> or specific <a href="https://github.com/facebook/facebook-instant-articles-sdk-php/tree/master/src/Facebook/InstantArticles/Transformer/Rules">Rules</a> to identify exactly what is happening.
+            </p>
+
+            <h3>How can I get more help?</h3>
+            <p>
+                I offer consultancy services at a rate of $100 / hour. <a href="https://twitter.com/thomasfletcher">Contact Me</a>
+            </p>
+
+            <h3>How can I help?</h3>
+            <p>
+                If you found a bug that you would like to fix, or you would like to implement a new feature,
+                please <a href="https://github.com/Crashthatch/fb-instant-articles-debugger/issues">open a Github issue</a>,
+                and then make the modifications needed to the source code and submit a <a href="https://github.com/Crashthatch/fb-instant-articles-debugger/pulls">pull request</a>.
+            </p>
+
+            <h3>Disclaimer</h3>
+            <p>
+                I am not affiliated with Facebook in any way, and this is an unofficial tool that uses the
+                open-source <a href="https://github.com/facebook/facebook-instant-articles-sdk-php">Facebook Instant Articles SDK</a>.
+                I provide no support, guarantee of correctness or continued operation.
+            </p>
         </div>
 
 

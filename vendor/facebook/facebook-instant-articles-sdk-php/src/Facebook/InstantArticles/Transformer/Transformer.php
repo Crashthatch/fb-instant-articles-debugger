@@ -227,7 +227,7 @@ class Transformer
                 }
                 $matched = false;
                 $log->debug("===========================");
-                $log->debug("Now Processing Node:");
+                $log->debug("Now Processing <".$child->nodeName."> Node:");
                 $log->debug($child->ownerDocument->saveHtml($child));
 
                 // Get all classes and interfaces this context extends/implements
@@ -252,13 +252,13 @@ class Transformer
                 $matchingContextRules = array_reverse($matchingContextRules);
 
                 $log->debug(sprintf("Current context: %s", join(", ", $shortClassNames)));
-                $log->debug(sprintf("%s Rules for this context. We will now test them in reverse-order to see if their selectors match this node.", count($matchingContextRules)));
+                $log->debug(sprintf("%s Rules for this context found. Testing against this node...", count($matchingContextRules)));
                 //$log->debug($matchingContextRules);
 
                 foreach ($matchingContextRules as $rule) {
                     // We know context was matched, now check if it matches the node
                     if ($rule->matchesNode($child)) {
-                        $log->debug("Node matches Rule:");
+                        $log->debug("Rule matching Node Found!:");
                         $log->debug($rule);
                         $current_context = $rule->apply($this, $current_context, $child);
                         $matched = true;
