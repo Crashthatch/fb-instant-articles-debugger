@@ -1,0 +1,6 @@
+{
+    "require": {
+        "facebook/facebook-instant-articles-sdk-php": "^1.5",
+        "mihaeu/html-formatter": "*"
+    }
+}

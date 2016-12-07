@@ -1,0 +1,177 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="html-input">
+            <textarea>
+<html>
+<head>
+    <script type="text/javascript" href="http://domain.com/javascript.js" />
+</head>
+<body>
+<div class="header">
+    <div class="title">
+        <h1>The article title</h1>
+        <h2>Sub Title</h2>
+        <span class="author">Author name</span>
+    </div>
+    <div class="hero-image">
+        <img src="http://domain.com/image.png" />
+        <div class="image-caption">
+            Some amazing moment captured by Photographer
+        </div>
+    </div>
+</div>
+<p>Lorem <b>ipsum</b> dolor sit amet, consectetur adipiscing elit. Sed eu arcu porta, ultrices massa ut, porttitor diam. Integer id auctor augue.</p>
+<p>Vivamus mattis, sem id consequat dapibus, odio urna fermentum risus, in blandit dolor justo vel ex. Curabitur a neque bibendum, hendrerit sem in, congue lectus.</p>
+<div class="image">
+    <img src="http://domain.com/image.png" />
+    <div class="image-caption">
+        Some amazing moment captured by Photographer
+    </div>
+</div>
+<p>Curabitur vulputate odio eu justo <i>venenatis</i>, a pretium orci placerat. Nam sed neque quis eros vestibulum mattis. Donec vitae mi egestas, laoreet massa et, fringilla libero.</p>
+</body>
+</html>
+            </textarea>
+        </div>
+        <div class="rules-input">
+            <textarea>
+{
+    "rules" :
+        [
+            {
+                "class": "TextNodeRule"
+            },
+            {
+                "class": "PassThroughRule",
+                "selector" : "html"
+            },
+            {
+                "class": "PassThroughRule",
+                "selector" : "head"
+            },
+            {
+                "class": "PassThroughRule",
+                "selector" : "script"
+            },
+            {
+                "class": "PassThroughRule",
+                "selector" : "body"
+            },
+            {
+                "class": "ItalicRule",
+                "selector" : "i"
+            },
+            {
+                "class": "BoldRule",
+                "selector" : "b"
+            },
+            {
+                "class": "ParagraphRule",
+                "selector" : "p"
+            },
+            {
+                "class": "HeaderTitleRule",
+                "selector" : "div.title h1"
+            },
+            {
+                "class": "HeaderSubTitleRule",
+                "selector" : "div.title h2"
+            },
+            {
+                "class": "HeaderRule",
+                "selector" : "div.header"
+            },
+            {
+                "class": "AuthorRule",
+                "selector" : "span.author",
+                "properties" : {
+                    "author.name" : {
+                        "type" : "string",
+                        "selector" : "span"
+                    }
+                }
+            },
+            {
+                "class": "CaptionRule",
+                "selector" : "div.image-caption"
+            },
+            {
+                "class": "ImageRule",
+                "selector" : "div.image",
+                "properties" : {
+                    "image.url" : {
+                        "type" : "string",
+                        "selector" : "img",
+                        "attribute": "src"
+                    },
+                    "image.caption" : {
+                        "type" : "element",
+                        "selector" : "div.image-caption"
+                    }
+                }
+            },
+            {
+                "class": "HeaderImageRule",
+                "selector" : "div.hero-image",
+                "properties" : {
+                    "image.url" : {
+                        "type" : "string",
+                        "selector" : "img",
+                        "attribute": "src"
+                    },
+                    "image.caption" : {
+                        "type" : "element",
+                        "selector" : "div.image-caption"
+                    }
+                }
+            }
+        ]
+}
+            </textarea>
+        </div>
+        <div class="button-container">
+            <button class="run">Run</button>
+        </div>
+        <div class="html-output">
+            <textarea><article></article></textarea>
+        </div>
+        <div class="log-output">
+            <textarea></textarea>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
