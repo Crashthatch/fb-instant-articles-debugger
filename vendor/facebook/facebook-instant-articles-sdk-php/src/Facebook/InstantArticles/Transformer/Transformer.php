@@ -220,12 +220,14 @@ class Transformer
         }
         $current_context = $context;
         if ($node->hasChildNodes()) {
+            $log->debug("Descending into children of <".$node->nodeName.">...");
             foreach ($node->childNodes as $child) {
                 if (self::isProcessed($child)) {
                     continue;
                 }
                 $matched = false;
                 $log->debug("===========================");
+                $log->debug("Now Processing Node:");
                 $log->debug($child->ownerDocument->saveHtml($child));
 
                 // Get all classes and interfaces this context extends/implements
@@ -233,7 +235,9 @@ class Transformer
 
                 // Look for rules applying to any of them as context
                 $matchingContextRules = [];
+                $shortClassNames = array();
                 foreach ($contextClassNames as $contextClassName) {
+                    $shortClassNames[] = substr($contextClassName, strrpos($contextClassName, "\\")+1);
                     if (isset($this->rules[$contextClassName])) {
                         // Use array union (+) instead of merge to preserve
                         // indexes (as they represent the order of insertion)
@@ -246,15 +250,26 @@ class Transformer
 
                 // Process in reverse order
                 $matchingContextRules = array_reverse($matchingContextRules);
+
+                $log->debug(sprintf("Current context: %s", join(", ", $shortClassNames)));
+                $log->debug(sprintf("%s Rules for this context. We will now test them in reverse-order to see if their selectors match this node.", count($matchingContextRules)));
+                //$log->debug($matchingContextRules);
+
                 foreach ($matchingContextRules as $rule) {
                     // We know context was matched, now check if it matches the node
                     if ($rule->matchesNode($child)) {
+                        $log->debug("Node matches Rule:");
+                        $log->debug($rule);
                         $current_context = $rule->apply($this, $current_context, $child);
                         $matched = true;
 
                         // Just a single rule for each node, so move on
                         break;
                     }
+                }
+
+                if( !$matched ){
+                    $log->debug("Node matched none of the rules in this context. This node will be dropped from the output HTML.");
                 }
 
                 if (!$matched &&
@@ -277,6 +292,7 @@ class Transformer
                     $this->addWarning(new UnrecognizedElement($current_context, $child));
                 }
             }
+            $log->debug("Finished processing children of <".$node->nodeName.">");
         }
 
         return $context;

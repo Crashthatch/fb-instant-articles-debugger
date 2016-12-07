@@ -36,18 +36,18 @@ $inputRules = $_POST['input-rules'];
 
 if( !$inputHtml ){
     http_response_code(400);
-    echo json_encode(array('error' => 'input-html was not provided in the POST params.'));
+    die(json_encode(array('error' => 'input-html was not provided in the POST params.')));
 }
 
 if( !$inputRules ){
     http_response_code(400);
-    echo json_encode(array('error' => 'input-rules was not provided in the POST params.'));
+    die(json_encode(array('error' => 'input-rules was not provided in the POST params.')));
 }
 
 //Validate JSON:
 if( !json_decode($inputRules, true) ){
     http_response_code(400);
-    echo json_encode(array('error' => 'input-rules was invalid JSON.'));
+    die(json_encode(array('error' => 'input-rules was invalid JSON.')));
 }
 
 //TODO: Validate HTML?
@@ -59,6 +59,11 @@ $instant_article = Elements\InstantArticle::create();
 $transformer = new Transformer\Transformer();
 //$transformer->loadRules( $wp_default_rules_file_content );
 $transformer->loadRules($inputRules);
+
+
+//TODO: Print out HTML Errors
+//TODO: Add checkbox to include default WP-plugin rules.
+//TODO:
 
 // Ignores errors on HTML parsing
 libxml_use_internal_errors(true);

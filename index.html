@@ -55,101 +55,100 @@
         <div class="rules-input">
             <textarea>
 {
-    "rules" :
-        [
-            {
-                "class": "TextNodeRule"
-            },
-            {
-                "class": "PassThroughRule",
-                "selector" : "html"
-            },
-            {
-                "class": "PassThroughRule",
-                "selector" : "head"
-            },
-            {
-                "class": "PassThroughRule",
-                "selector" : "script"
-            },
-            {
-                "class": "PassThroughRule",
-                "selector" : "body"
-            },
-            {
-                "class": "ItalicRule",
-                "selector" : "i"
-            },
-            {
-                "class": "BoldRule",
-                "selector" : "b"
-            },
-            {
-                "class": "ParagraphRule",
-                "selector" : "p"
-            },
-            {
-                "class": "HeaderTitleRule",
-                "selector" : "div.title h1"
-            },
-            {
-                "class": "HeaderSubTitleRule",
-                "selector" : "div.title h2"
-            },
-            {
-                "class": "HeaderRule",
-                "selector" : "div.header"
-            },
-            {
-                "class": "AuthorRule",
-                "selector" : "span.author",
-                "properties" : {
-                    "author.name" : {
-                        "type" : "string",
-                        "selector" : "span"
-                    }
-                }
-            },
-            {
-                "class": "CaptionRule",
-                "selector" : "div.image-caption"
-            },
-            {
-                "class": "ImageRule",
-                "selector" : "div.image",
-                "properties" : {
-                    "image.url" : {
-                        "type" : "string",
-                        "selector" : "img",
-                        "attribute": "src"
-                    },
-                    "image.caption" : {
-                        "type" : "element",
-                        "selector" : "div.image-caption"
-                    }
-                }
-            },
-            {
-                "class": "HeaderImageRule",
-                "selector" : "div.hero-image",
-                "properties" : {
-                    "image.url" : {
-                        "type" : "string",
-                        "selector" : "img",
-                        "attribute": "src"
-                    },
-                    "image.caption" : {
-                        "type" : "element",
-                        "selector" : "div.image-caption"
-                    }
+    "rules" :[
+        {
+            "class": "TextNodeRule"
+        },
+        {
+            "class": "PassThroughRule",
+            "selector" : "html"
+        },
+        {
+            "class": "PassThroughRule",
+            "selector" : "head"
+        },
+        {
+            "class": "PassThroughRule",
+            "selector" : "script"
+        },
+        {
+            "class": "PassThroughRule",
+            "selector" : "body"
+        },
+        {
+            "class": "ItalicRule",
+            "selector" : "i"
+        },
+        {
+            "class": "BoldRule",
+            "selector" : "b"
+        },
+        {
+            "class": "ParagraphRule",
+            "selector" : "p"
+        },
+        {
+            "class": "HeaderTitleRule",
+            "selector" : "div.title h1"
+        },
+        {
+            "class": "HeaderSubTitleRule",
+            "selector" : "div.title h2"
+        },
+        {
+            "class": "HeaderRule",
+            "selector" : "div.header"
+        },
+        {
+            "class": "AuthorRule",
+            "selector" : "span.author",
+            "properties" : {
+                "author.name" : {
+                    "type" : "string",
+                    "selector" : "span"
                 }
             }
-        ]
+        },
+        {
+            "class": "CaptionRule",
+            "selector" : "div.image-caption"
+        },
+        {
+            "class": "ImageRule",
+            "selector" : "div.image",
+            "properties" : {
+                "image.url" : {
+                    "type" : "string",
+                    "selector" : "img",
+                    "attribute": "src"
+                },
+                "image.caption" : {
+                    "type" : "element",
+                    "selector" : "div.image-caption"
+                }
+            }
+        },
+        {
+            "class": "HeaderImageRule",
+            "selector" : "div.hero-image",
+            "properties" : {
+                "image.url" : {
+                    "type" : "string",
+                    "selector" : "img",
+                    "attribute": "src"
+                },
+                "image.caption" : {
+                    "type" : "element",
+                    "selector" : "div.image-caption"
+                }
+            }
+        }
+    ]
 }
             </textarea>
         </div>
         <div class="button-container">
-            <button class="run">Run</button>
+            <button class="run">Transform</button>
         </div>
         <div class="html-output">
             <textarea><article></article></textarea>
