@@ -289,10 +289,14 @@ textarea {
 }
 html, body{
     height: 100%;
+    background-color: #f1f2ff;
 }
 
 
 
+.header{
+    padding: 1px 8px;
+}
 .html-input{
     display: inline-block;
     width: 49%;
@@ -317,4 +321,12 @@ textarea{
     height: 100%;
     width: 100%;
     font-size: 0.8em;
+}
+
+.button-container{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.faqs{
+    padding: 8px;
 }
