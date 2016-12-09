@@ -7,7 +7,9 @@ $('.run').on('click', function(){
   //Send to server.
   $.post('transform.php', {
     "input-html": $('.html-input textarea').val(),
-    "input-rules": $('.rules-input textarea').val()
+    "input-rules": $('.rules-input textarea').val(),
+    "include-wp-default-rules": $('#include-wp-default-rules').is(':checked')
+
   })
   .then( function(response){
     //Show results.

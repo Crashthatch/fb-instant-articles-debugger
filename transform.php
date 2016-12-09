@@ -28,11 +28,10 @@ $logConfig = array(
 $log->configure($logConfig);
 $log->setLevel(LoggerLevel::getLevelDebug());
 
-// Loads the rules content file
-//$rules_file_content = file_get_contents("simple-rules.json", true);
-//$wp_default_rules_file_content = file_get_contents("wp-default-rules.json", true);
+//Get input POST vars.
 $inputHtml = $_POST['input-html'];
 $inputRules = $_POST['input-rules'];
+$includeWpDefaultRules = $_POST['include-wp-default-rules'];
 
 if( !$inputHtml ){
     http_response_code(400);
@@ -57,7 +56,10 @@ $instant_article = Elements\InstantArticle::create();
 
 // Creates the transformer and loads the rules
 $transformer = new Transformer\Transformer();
-//$transformer->loadRules( $wp_default_rules_file_content );
+if( strtolower($includeWpDefaultRules) == "true" ){
+    $wp_default_rules_file_content = file_get_contents("wp-default-rules.json", true);
+    $transformer->loadRules( $wp_default_rules_file_content );
+}
 $transformer->loadRules($inputRules);
 
 
