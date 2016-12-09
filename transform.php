@@ -64,8 +64,6 @@ if( strtolower($includeWpDefaultRules) == "true" ){
 $transformer->loadRules($inputRules);
 
 //TODO: Print out HTML Errors
-//TODO: Print out all loaded rules.
-//TODO: Add checkbox to include default WP-plugin rules.
 //TODO: Checkbox to Hide Empty Text Nodes
 
 // Ignores errors on HTML parsing
@@ -83,8 +81,6 @@ $transformerLog = ob_get_clean();
 $warnings = $transformer->getWarnings();
 //TODO: Print these somewhere?
 
-//TODO: Print out the context at the end, right before converting it to HTML.
-
 // Renders the InstantArticle markup format
 $result = $instant_article->render();
 $result = Mihaeu\HtmlFormatter::format($result);
@@ -94,5 +90,7 @@ $return['result'] = $result;
 $return['rules'] = "All ".count($transformer->getRules())." Rules. Will be searched in reverse order (So later rules will match first and 'override' earlier rules): \n"
     .print_r($transformer->getRules(), true);
 $return['log'] = $transformerLog;
+$return['instant-article-object'] = "This is the representation of the final instant article, as a tree of PHP Elements with their properties, right before it is rendered to HTML:\n"
+    .print_r($instant_article, true);
 
 echo json_encode($return);

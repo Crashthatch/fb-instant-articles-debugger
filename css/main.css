@@ -322,6 +322,11 @@ html, body{
     width: 99%;
     height: 25%;
 }
+.instant-article-object{
+    display: inline-block;
+    width: 99%;
+    height: 25%;
+}
 textarea{
     height: 100%;
     width: 100%;
