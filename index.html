@@ -64,7 +64,7 @@
         <div class="rules-input">
             <input type="checkbox" checked="true" id="include-wp-default-rules" name="include-wp-default-rules" class=".include-wp-default-rules">
                 <label for="include-wp-default-rules">
-                    Include <a href="https://github.com/Automattic/facebook-instant-articles-wp/blob/master/rules-configuration.json">Wordpress plugin pre-defined rules</a> as a base. <!--<a href="#wp-default-rules-help">[?]</a>-->
+                    Include <a href="https://github.com/Automattic/facebook-instant-articles-wp/blob/master/rules-configuration.json">Wordpress plugin pre-defined rules</a> as a base. <a href="#wp-default-rules-help">[?]</a>
                 </label>
             </input>
             <textarea>
@@ -228,6 +228,21 @@
             </p>
             <p>
                 At the end you are left with a HTML article that uses only the allowed subset of elements that can be submitted to Facebook Instant Articles for display (box 3).
+            </p>
+
+            <a name="wp-default-rules-help"></a>
+            <h3>What does the "Include WP pre-defined rules" checkbox do?</h3>
+            <p>
+                The Wordpress Plugin has a starting set of <a href="https://github.com/Automattic/facebook-instant-articles-wp/blob/master/rules-configuration.json">pre-defined rules</a> that transform common elements from wordpress HTML into HTML for Instant Articles.
+                If you have custom elements (or elements created by non-default WP plugins) in your page you use "Custom transformer rules" to transform these elements.
+                The plugin adds these custom rules <b>in addition to</b> the pre-defined rules.
+                The custom rules are added after the pre-defined rules so that you can extend or override them.
+            </p>
+            <p>
+                If you are using the WP Plugin, you should leave this box checked.
+            </p>
+            <p>
+                If you are not using Wordpress, you can uncheck it to start with no rules, and build your own ruleset from scratch.
             </p>
 
             <h3>I get an empty &lt;article&gt; tag in my output!</h3>
