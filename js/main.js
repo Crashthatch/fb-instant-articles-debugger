@@ -3,6 +3,7 @@ $('.run').on('click', function(){
   //Clear outputs.
   $('.html-output textarea').val('');
   $('.log-output textarea').val('');
+  $('.rules-output textarea').val('');
 
   //Send to server.
   $.post('transform.php', {
@@ -15,6 +16,7 @@ $('.run').on('click', function(){
     //Show results.
     $('.html-output textarea').val(response.result);
     $('.log-output textarea').val(response.log);
+      $('.rules-output textarea').val(response.rules);
   },
   function(err){
     console.error(err);

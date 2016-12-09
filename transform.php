@@ -91,7 +91,8 @@ $result = Mihaeu\HtmlFormatter::format($result);
 
 $return = [];
 $return['result'] = $result;
-$return['log'] = "All ".count($transformer->getRules())." Rules. Will be searched in reverse order (So later rules will match first and 'override' earlier rules): \n".print_r($transformer->getRules(), true)
-    ."\n============\n".$transformerLog;
+$return['rules'] = "All ".count($transformer->getRules())." Rules. Will be searched in reverse order (So later rules will match first and 'override' earlier rules): \n"
+    .print_r($transformer->getRules(), true);
+$return['log'] = $transformerLog;
 
 echo json_encode($return);
