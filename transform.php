@@ -63,7 +63,6 @@ if( strtolower($includeWpDefaultRules) == "true" ){
 }
 $transformer->loadRules($inputRules);
 
-
 //TODO: Print out HTML Errors
 //TODO: Print out all loaded rules.
 //TODO: Add checkbox to include default WP-plugin rules.
@@ -92,6 +91,7 @@ $result = Mihaeu\HtmlFormatter::format($result);
 
 $return = [];
 $return['result'] = $result;
-$return['log'] = $transformerLog;
+$return['log'] = "All ".count($transformer->getRules())." Rules. Will be searched in reverse order (So later rules will match first and 'override' earlier rules): \n".print_r($transformer->getRules(), true)
+    ."\n============\n".$transformerLog;
 
 echo json_encode($return);
