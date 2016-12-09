@@ -340,3 +340,29 @@ textarea{
 .faqs{
     padding: 8px;
 }
+
+
+footer{
+    box-sizing: border-box;
+    position: absolute;
+    height: 35px;
+    padding-top: 5px;
+    width: 100%;
+    text-align: center;
+    background-color: #0f1721;
+    color: rgba(255,255,255,0.7);
+    overflow: hidden;
+}
+footer a{
+    color: rgba(255,255,255,0.7);
+}
+.footertext{
+    display: inline-block;
+    font-size: 0.8em;
+    position: relative;
+    top: -13px;
+}
+.addthis_inline_share_toolbox{
+    display: inline-block;
+    height: 31px;
+}
