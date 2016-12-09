@@ -57,7 +57,8 @@ $instant_article = Elements\InstantArticle::create();
 // Creates the transformer and loads the rules
 $transformer = new Transformer\Transformer();
 if( strtolower($includeWpDefaultRules) == "true" ){
-    $wp_default_rules_file_content = file_get_contents("wp-default-rules.json", true);
+    //$wp_default_rules_file_content = file_get_contents("wp-default-rules.json", true);
+    $wp_default_rules_file_content = file_get_contents('https://raw.githubusercontent.com/Automattic/facebook-instant-articles-wp/master/rules-configuration.json', true);
     $transformer->loadRules( $wp_default_rules_file_content );
 }
 $transformer->loadRules($inputRules);
