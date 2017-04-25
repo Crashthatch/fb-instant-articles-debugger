@@ -1,0 +1,6 @@
+.git
+.idea
+vendor
+.dockerignore
+build-and-deploy.sh
+.gitignore

@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Facebook\InstantArticles\Elements as Elements;
 use Facebook\InstantArticles\Transformer as Transformer;
 
+error_reporting(E_ERROR);
 
 header("Content-type: application/json");
 
