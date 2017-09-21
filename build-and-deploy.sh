@@ -5,6 +5,9 @@
 aws ecr get-login --region us-east-1 | bash
 aws ecr get-login --region us-east-1 | sed s/docker/hyper/ | bash
 
+#Before building it might be a good idea to update your composer.lock file if you haven't done so in a while.
+# ./composer.phar update
+
 docker build -t fbia .
 docker tag fbia:latest 016279857314.dkr.ecr.us-east-1.amazonaws.com/fbia:latest
 docker push 016279857314.dkr.ecr.us-east-1.amazonaws.com/fbia:latest
